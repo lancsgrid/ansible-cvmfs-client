@@ -1,0 +1,6 @@
+---
+# Defaults file for ansible-cvmfs-client
+ansible_cvmfs_client_CVMFS_REPOSITORIES: atlas,atlas-condb,lhcb
+ansible_cvmfs_client_CVMFS_CACHE_BASE: /scratch/var/cache/cvmfs2
+ansible_cvmfs_client_CVMFS_QUOTA_LIMIT: 2000
+ansible_cvmfs_client_CVMFS_HTTP_PROXY: "http://squid.site:3128"

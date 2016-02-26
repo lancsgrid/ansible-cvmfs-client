@@ -39,7 +39,7 @@
 
 # Copy generic config file.
 - name: Copy generic config file.
-  copy: >
+  template: >
     src=etc/cvmfs/default.local
     dest=/etc/cvmfs/default.local
     owner=root
