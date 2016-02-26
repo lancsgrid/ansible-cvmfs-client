@@ -83,7 +83,8 @@
     state=present
 
 # Run the setup command for cvmfs
-
-#/usr/bin/cvmfs_config setup
-
-## # # # # #
+- name: Setup CVMFS
+  shell: /usr/bin/cvmfs_config setup
+  register: setup_cvmfs
+  ignore_errors: yes
+  changed_when: setup_cvmfs.rc != 0
