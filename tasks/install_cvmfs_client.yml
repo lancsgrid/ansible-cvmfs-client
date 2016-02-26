@@ -40,7 +40,7 @@
 # Copy generic config file.
 - name: Copy generic config file.
   template: >
-    src=etc/cvmfs/default.local
+    src=etc/cvmfs/default.local.j2
     dest=/etc/cvmfs/default.local
     owner=root
     group=root
