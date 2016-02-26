@@ -1,0 +1,88 @@
+---
+# These tasks install cvmfs on a client node and copy the neccessary configs
+
+# Install cernvm repo
+- name: Install cernvm repo.
+  copy: >
+    src=etc/yum.repos.d/cernvm.repo
+    dest=/etc/yum.repos.d/cernvm.repo
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+
+# Install cernvm repo keys
+- name: Install cernvm repo keys.
+  copy: >
+    src=etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
+    dest=/etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+
+# Install cvmfs and dependencies.
+- name: Install cvmfs and dependencies.
+  yum: name={{ item }} state=present
+  with_items:
+  - fuse
+  - cvmfs
+  - SL_no_colorls
+  - cvmfs-init-scripts
+
+# Create cache for cvmfs
+- name: Create cache directory.
+  file: >
+    dest=/scratch/var/cache/cvmfs2
+    state=directory
+    owner=cvmfs
+    group=cvmfs
+    mode="u=rwx,g=,o="
+
+# Copy generic config file.
+- name: Copy generic config file.
+  copy: >
+    src=etc/cvmfs/default.local
+    dest=/etc/cvmfs/default.local
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+
+
+# Copy atlas config file.
+- name: Copy atlas config file.
+  copy: >
+    src=etc/cvmfs/config.d/atlas.cern.ch.local
+    dest=/etc/cvmfs/config.d/atlas.cern.ch.local
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+
+# Copy lhcb config file.
+- name: Copy lhcb config file.
+  copy: >
+    src=etc/cvmfs/config.d/lhcb.cern.ch.local
+    dest=/etc/cvmfs/config.d/lhcb.cern.ch.local
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+
+# Copy domain config file.
+- name: Copy domain config file.
+  copy: >
+    src=etc/cvmfs/domain.d/cern.ch.local
+    dest=/etc/cvmfs/domain.d/cern.ch.local
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+
+# Configure fuse.
+- name: Configure fuse.
+  lineinfile: >
+    dest=/etc/sysconfig/network
+    regexp=^#.*user_allow_other
+    line=user_allow_other
+
+# Run the setup command for cvmfs
+
+/usr/bin/cvmfs_config setup
+
+## # # # # #
