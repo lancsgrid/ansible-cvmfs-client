@@ -83,6 +83,6 @@
 
 # Run the setup command for cvmfs
 
-/usr/bin/cvmfs_config setup
+#/usr/bin/cvmfs_config setup
 
 ## # # # # #
