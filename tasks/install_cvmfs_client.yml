@@ -77,9 +77,10 @@
 # Configure fuse.
 - name: Configure fuse.
   lineinfile: >
-    dest=/etc/sysconfig/network
-    regexp=^#.*user_allow_other
+    dest=/etc/fuse.conf
+    regexp=^#?\ *user_allow_other
     line=user_allow_other
+    state=present
 
 # Run the setup command for cvmfs
 
