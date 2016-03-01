@@ -39,18 +39,17 @@
 
 # Copy generic config file.
 - name: Copy generic config file.
-  copy: >
-    src=etc/cvmfs/default.local
+  template: >
+    src=etc/cvmfs/default.local.j2
     dest=/etc/cvmfs/default.local
     owner=root
     group=root
     mode="u=rw,g=r,o=r"
 
-
 # Copy atlas config file.
 - name: Copy atlas config file.
-  copy: >
-    src=etc/cvmfs/config.d/atlas.cern.ch.local
+  template: >
+    src=etc/cvmfs/config.d/atlas.cern.ch.local.j2
     dest=/etc/cvmfs/config.d/atlas.cern.ch.local
     owner=root
     group=root
@@ -58,8 +57,8 @@
 
 # Copy lhcb config file.
 - name: Copy lhcb config file.
-  copy: >
-    src=etc/cvmfs/config.d/lhcb.cern.ch.local
+  template: >
+    src=etc/cvmfs/config.d/lhcb.cern.ch.local.j2
     dest=/etc/cvmfs/config.d/lhcb.cern.ch.local
     owner=root
     group=root
@@ -67,8 +66,8 @@
 
 # Copy domain config file.
 - name: Copy domain config file.
-  copy: >
-    src=etc/cvmfs/domain.d/cern.ch.local
+  template: >
+    src=etc/cvmfs/domain.d/cern.ch.local.j2
     dest=/etc/cvmfs/domain.d/cern.ch.local
     owner=root
     group=root

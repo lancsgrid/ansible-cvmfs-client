@@ -1,4 +1,0 @@
-CVMFS_REPOSITORIES=atlas,atlas-condb,lhcb
-CVMFS_CACHE_BASE=/scratch/var/cache/cvmfs2
-CVMFS_QUOTA_LIMIT=2000
-CVMFS_HTTP_PROXY="http://hafgufa.hec.lancs.ac.uk:3128"

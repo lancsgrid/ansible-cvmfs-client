@@ -1,0 +1,13 @@
+---
+# Defaults file for ansible-cvmfs-client
+ansible_cvmfs_client_CVMFS_REPOSITORIES: atlas,atlas-condb,lhcb
+ansible_cvmfs_client_CVMFS_CACHE_BASE: /scratch/var/cache/cvmfs2
+ansible_cvmfs_client_CVMFS_QUOTA_LIMIT: 2000
+ansible_cvmfs_client_CVMFS_HTTP_PROXY: "http://squid.site:3128"
+
+ansible_cvmfs_client_lhcb_CVMFS_QUOTA_LIMIT: 10000
+ansible_cvmfs_client_atlas_CVMFS_QUOTA_LIMIT: 5000
+
+
+ansible_cvmfs_client_CVMFS_SERVER_URL: "http://cernvmfs.gridpp.rl.ac.uk/opt/@org@;http://cvmfs-stratum-one.cern.ch/opt/@org@;http://cvmfs.racf.bnl.gov/opt/@org@"
+ansible_cvmfs_client_CVMFS_PUBLIC_KEY: /etc/cvmfs/keys/cern.ch/cern.ch.pub
