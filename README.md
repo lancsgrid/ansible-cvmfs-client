@@ -10,7 +10,10 @@ Only tested on an SL 7 node.
 Role Variables
 ------------
 
-Currently implements variables for "/etc/cvmfs/default.local". All variables are prefixed with role name, ansible_cvmfs_client. Variables are and their defaults are:
+All variables are prefixed with role name, ansible_cvmfs_client. Variables, the config file they affect and are and their defaults are listed below:
+
+
+File: default.local
 
 `ansible_cvmfs_client_CVMFS_REPOSITORIES: atlas,atlas-condb,lhcb`
 
@@ -20,7 +23,25 @@ Currently implements variables for "/etc/cvmfs/default.local". All variables are
 
 `ansible_cvmfs_client_CVMFS_HTTP_PROXY: http://squid.site:3128`
 
+
+File: lhcb.cern.ch.local
+
+`ansible_cvmfs_client_lhcb_CVMFS_QUOTA_LIMIT: 10000`
+
+File: atlas.cern.ch.local
+
+`ansible_cvmfs_client_atlas_CVMFS_QUOTA_LIMIT: 5000`
+
+
+File: domain.d/cern.ch.local
+
+`ansible_cvmfs_client_CVMFS_SERVER_URL: "http://cernvmfs.gridpp.rl.ac.uk/opt/@org@;http://cvmfs-stratum-one.cern.ch/opt/@org@;http://cvmfs.racf.bnl.gov/opt/@org@"`
+
+`ansible_cvmfs_client_CVMFS_PUBLIC_KEY: /etc/cvmfs/keys/cern.ch/cern.ch.pub`
+
+
 The default for `ansible_cvmfs_client_CVMFS_HTTP_PROXY` will cause and error, or the server will fail over to cern.  Please change this one.
+
 
 Dependencies
 ------------
