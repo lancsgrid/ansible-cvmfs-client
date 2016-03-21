@@ -81,12 +81,19 @@
     line=user_allow_other
     state=present
 
+# Configure auto.master.
+- name: Configure auto.master.
+  lineinfile: >
+    dest=/etc/auto.master
+    line=/cvmfs /etc/auto.cvmfs
+    state=present
+
 # Run the setup command for cvmfs
-- name: Setup CVMFS
-  shell: /usr/bin/cvmfs_config setup
-  register: setup_cvmfs
-  ignore_errors: yes
-  changed_when: setup_cvmfs.rc != 0
+#- name: Setup CVMFS
+#  shell: /usr/bin/cvmfs_config setup
+#  register: setup_cvmfs
+#  ignore_errors: yes
+#  changed_when: setup_cvmfs.rc != 0
 
 # Run the setup command for cvmfs
 - name: Ensure autofs is running and enabled
