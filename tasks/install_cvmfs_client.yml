@@ -31,11 +31,15 @@
 # Create cache for cvmfs
 - name: Create cache directory.
   file: >
-    dest=/scratch/var/cache/cvmfs2
+    dest={{ ansible_cvmfs_client_CVMFS_CACHE_BASE }}
     state=directory
     owner=cvmfs
     group=cvmfs
     mode="u=rwx,g=,o="
+
+- name: Cache dir has correct SELinux context on SL6
+  file: path={{ ansible_cvmfs_client_CVMFS_CACHE_BASE }} setype=var_lib_t recurse=yes
+
 
 # Copy generic config file.
 - name: Copy generic config file.
@@ -73,6 +77,22 @@
     group=root
     mode="u=rw,g=r,o=r"
 
+
+# Check fuse file exists.
+- name: Check fuse.conf exists
+  stat: path=/etc/fuse.conf
+  register: fuse_exists_result
+
+# Ensure fuse file exists.
+- name: Ensure fuse.conf exists
+  file: >
+    path=/etc/fuse.conf
+    mode="u=rw,g=r,o=r"
+    owner=root
+    group=root
+    state=touch
+  when: fuse_exists_result.stat.exists == False
+
 # Configure fuse.
 - name: Configure fuse.
   lineinfile: >
@@ -81,12 +101,19 @@
     line=user_allow_other
     state=present
 
+# Configure auto.master.
+- name: Configure auto.master.
+  lineinfile: >
+    dest=/etc/auto.master
+    line='/cvmfs /etc/auto.cvmfs'
+    state=present
+
 # Run the setup command for cvmfs
-- name: Setup CVMFS
-  shell: /usr/bin/cvmfs_config setup
-  register: setup_cvmfs
-  ignore_errors: yes
-  changed_when: setup_cvmfs.rc != 0
+#- name: Setup CVMFS
+#  shell: /usr/bin/cvmfs_config setup
+#  register: setup_cvmfs
+#  ignore_errors: yes
+#  changed_when: setup_cvmfs.rc != 0
 
 # Run the setup command for cvmfs
 - name: Ensure autofs is running and enabled

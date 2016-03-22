@@ -4,7 +4,7 @@ Install and configure cvmfs on client node
 Requirements
 ------------
 
-Only tested on an SL 7 node.
+Tested on an SL 6 and 7 nodes.
 
 
 Role Variables
